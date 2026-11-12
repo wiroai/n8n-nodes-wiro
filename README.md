@@ -18,6 +18,12 @@ The **Wiro AI** node runs any of the 1,000+ models on [Wiro AI](https://wiro.ai/
 
 ---
 
+## Demo
+
+[Watch the two-and-a-half-minute demo](https://cdn.jsdelivr.net/gh/wiroai/n8n-nodes-wiro@22a1593/.github/assets/wiro-ai-n8n-demo.mp4). It installs the package from npm in n8n, adds a Wiro AI API credential and tests it, runs `pruna/p-image` with the Wiro AI node, then has an AI Agent call the same node as a tool.
+
+---
+
 ## Screenshots
 
 The node and its actions in the n8n node panel:
