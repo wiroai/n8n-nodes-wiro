@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 (2026-11-12)
+
+- Published from GitHub Actions with an npm provenance statement. The node itself is the same as in 1.0.0.
+
 ## 1.0.0 (2026-11-12)
 
 ### New
