@@ -1,0 +1,63 @@
+{
+	"name": "@wiro-ai/n8n-nodes-wiro",
+	"version": "1.0.0",
+	"description": "Run 1,000+ Wiro AI models for video, images, audio, text and 3D in n8n, from one node.",
+	"license": "MIT",
+	"homepage": "https://wiro.ai",
+	"keywords": [
+		"n8n-community-node-package",
+		"n8n",
+		"wiro",
+		"wiro-ai",
+		"ai",
+		"image-generation",
+		"video-generation",
+		"text-to-speech",
+		"llm",
+		"automation"
+	],
+	"author": {
+		"name": "Wiro AI",
+		"email": "support@wiro.ai",
+		"url": "https://wiro.ai"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/wiroai/n8n-nodes-wiro.git"
+	},
+	"bugs": {
+		"url": "https://github.com/wiroai/n8n-nodes-wiro/issues"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/WiroAiApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/Wiro/Wiro.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "^0.56.3",
+		"eslint": "9.32.0",
+		"prettier": "3.6.2",
+		"release-it": "^21.1.0",
+		"typescript": "5.9.2"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}

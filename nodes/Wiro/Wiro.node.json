@@ -1,0 +1,30 @@
+{
+	"node": "@wiro-ai/n8n-nodes-wiro.wiro",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing & Content", "Productivity"],
+	"alias": [
+		"Wiro",
+		"Wiro AI",
+		"AI Models",
+		"Image Generation",
+		"Video Generation",
+		"Text to Speech",
+		"Speech to Text",
+		"LLM",
+		"Upscale",
+		"3D"
+	],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/wiroai/n8n-nodes-wiro#readme"
+			}
+		],
+		"credentialDocumentation": [
+			{
+				"url": "https://wiro.ai/docs/authentication"
+			}
+		]
+	}
+}
