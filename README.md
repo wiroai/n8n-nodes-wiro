@@ -160,6 +160,16 @@ The node is marked `usableAsTool`, so you can attach it to an n8n **AI Agent** a
 
 ---
 
+## Agent skill
+
+This repository includes an agent skill, `wiro-n8n`, in [`skills/wiro-n8n/SKILL.md`](./skills/wiro-n8n/SKILL.md). It shows coding agents such as Claude Code, Codex and Cursor how to build n8n workflows with the Wiro AI node: install, credentials, picking a model, outputs, errors and cost control. Install it with:
+
+```bash
+npx skills add wiroai/n8n-nodes-wiro --skill wiro-n8n
+```
+
+---
+
 ## Compatibility
 
 Needs n8n 1.85.0 or later, the first release with `NodeConnectionTypes`, which the node imports. Tested on n8n 2.46.7. The package has no runtime dependencies.
