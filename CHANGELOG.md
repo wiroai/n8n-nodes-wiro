@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 (2026-11-12)
+
+- Model inputs show English text only. Options that the catalog names in another script get their English names, for example the Chinese dialects of OmniVoice. Labels, default values and model descriptions in another language are left out.
+- New icon: the Wiro AI mark on its light plate, in both the light and the dark theme.
+
 ## 1.0.1 (2026-11-12)
 
 - Published from GitHub Actions with an npm provenance statement. The node itself is the same as in 1.0.0.

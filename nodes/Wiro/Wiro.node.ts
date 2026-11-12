@@ -13,6 +13,7 @@ import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workf
 
 import {
 	buildRunBody,
+	englishText,
 	getModelParameters,
 	getTask,
 	splitModel,
@@ -291,7 +292,7 @@ export class Wiro implements INodeType {
 						return {
 							name: slug,
 							value: slug,
-							description: typeof tool.title === 'string' ? tool.title : undefined,
+							description: englishText(tool.title),
 							url: `https://wiro.ai/models/${slug}`,
 						};
 					}),

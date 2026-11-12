@@ -162,11 +162,7 @@ The node is marked `usableAsTool`, so you can attach it to an n8n **AI Agent** a
 
 ## Compatibility
 
-Tested on n8n 2.46.7. The package has no runtime dependencies.
-
-## One node per model
-
-[@wiro-ai/n8n-nodes-wiroai](https://github.com/wiroai/n8n-nodes-wiroai) is the earlier package. It adds a separate node for each Wiro model, plus Wiro Workflow and Wiro Agent nodes. Both packages can be installed side by side.
+Needs n8n 1.85.0 or later, the first release with `NodeConnectionTypes`, which the node imports. Tested on n8n 2.46.7. The package has no runtime dependencies.
 
 ---
 
@@ -183,7 +179,6 @@ Tested on n8n 2.46.7. The package has no runtime dependencies.
 
 | Repository | What it is |
 | --- | --- |
-| [n8n-nodes-wiroai](https://github.com/wiroai/n8n-nodes-wiroai) | One n8n node per Wiro AI model, plus Wiro Workflow and Wiro Agent nodes, [`@wiro-ai/n8n-nodes-wiroai` on npm](https://www.npmjs.com/package/@wiro-ai/n8n-nodes-wiroai) |
 | [Wiro-MCP](https://github.com/wiroai/Wiro-MCP) | Official MCP server for Wiro AI, [`@wiro-ai/wiro-mcp` on npm](https://www.npmjs.com/package/@wiro-ai/wiro-mcp) |
 | [Wiro-LLM](https://github.com/wiroai/Wiro-LLM) | Vercel AI SDK provider for chat, images, speech, transcription and video, [`@wiro-ai/wiro-llm` on npm](https://www.npmjs.com/package/@wiro-ai/wiro-llm) |
 | [Wiro-Chromium-Extension](https://github.com/wiroai/Wiro-Chromium-Extension) | Wiro AI extension for Chrome, Edge, Opera and Brave |

@@ -31,6 +31,83 @@ const NUMBER_TYPES = new Set(['number', 'float', 'range']);
 // Inputs that hold sample content in the catalog: they start empty instead of taking the sample.
 const SAMPLE_ID = /prompt|input|messages|tools|tooloutputs|tool_choice|previoustasktoken/i;
 
+// Letters of scripts other than Latin (Greek, Cyrillic, Hebrew, Arabic, Devanagari, Thai, Hangul, CJK,
+// full-width forms) and the letters only Turkish uses. Text from the catalog that holds them is not
+// shown in the node, which keeps the node's interface in English.
+const NON_ENGLISH_RANGES: Array<[number, number]> = [
+	[0x0370, 0x03ff], // Greek
+	[0x0400, 0x04ff], // Cyrillic
+	[0x0590, 0x05ff], // Hebrew
+	[0x0600, 0x06ff], // Arabic
+	[0x0900, 0x097f], // Devanagari
+	[0x0e00, 0x0e7f], // Thai
+	[0x1100, 0x11ff], // Hangul jamo
+	[0x3000, 0x9fff], // CJK symbols, kana and ideographs
+	[0xac00, 0xd7af], // Hangul syllables
+	[0xf900, 0xfaff], // CJK compatibility ideographs
+	[0xff00, 0xffef], // Full-width forms
+];
+const TURKISH_ONLY_LETTERS = new Set([0x011e, 0x011f, 0x015e, 0x015f, 0x0130, 0x0131]);
+
+function hasNonEnglishLetters(text: string): boolean {
+	for (const character of text) {
+		const code = character.codePointAt(0) ?? 0;
+		if (TURKISH_ONLY_LETTERS.has(code)) return true;
+		if (NON_ENGLISH_RANGES.some(([first, last]) => code >= first && code <= last)) return true;
+	}
+	return false;
+}
+
+// English names for the Chinese dialects that some speech models list only in Chinese.
+const DIALECT_NAMES: Record<string, string> = {
+	'\u4e1c\u5317\u8bdd': 'Northeastern Mandarin Dialect',
+	'\u4e91\u5357\u8bdd': 'Yunnan Dialect',
+	'\u56db\u5ddd\u8bdd': 'Sichuan Dialect',
+	'\u5b81\u590f\u8bdd': 'Ningxia Dialect',
+	'\u6842\u6797\u8bdd': 'Guilin Dialect',
+	'\u6cb3\u5357\u8bdd': 'Henan Dialect',
+	'\u6d4e\u5357\u8bdd': 'Jinan Dialect',
+	'\u7518\u8083\u8bdd': 'Gansu Dialect',
+	'\u77f3\u5bb6\u5e84\u8bdd': 'Shijiazhuang Dialect',
+	'\u8d35\u5dde\u8bdd': 'Guizhou Dialect',
+	'\u9655\u897f\u8bdd': 'Shaanxi Dialect',
+	'\u9752\u5c9b\u8bdd': 'Qingdao Dialect',
+};
+
+/**
+ * Catalog text as the node shows it, or undefined when it is not English. Math-styled letters
+ * become plain ones, and the Greek mu of names such as "G.711 mu-law" is written as "mu".
+ */
+export function englishText(value: unknown): string | undefined {
+	if (value === undefined || value === null) return undefined;
+	const text = String(value)
+		.normalize('NFKC')
+		.replace(/[\u00b5\u03bc]/g, 'mu')
+		.replace(/\s+/g, ' ')
+		.trim();
+	return hasNonEnglishLetters(text) ? undefined : text;
+}
+
+/**
+ * The English name of a select option: the name itself, its English half ("Male" from "Male - " followed by Chinese),
+ * the English name of a dialect, the option's value, or its position in the list.
+ */
+export function optionName(option: { text?: string; value?: unknown }, index: number): string {
+	const raw = String(option.text ?? option.value ?? '').trim();
+	const dialect = DIALECT_NAMES[raw];
+	if (dialect) return dialect;
+	const name = englishText(raw);
+	if (name) return name;
+	const halves = raw
+		.split(/\s+[-|/]\s+/)
+		.map((half) => englishText(half))
+		.filter((half): half is string => !!half);
+	if (halves.length > 0) return halves.join(' - ');
+	const value = englishText(String(option.value ?? '').replace(/[_-]+/g, ' '));
+	if (value) return titleCase(value);
+	return `Option ${index + 1}`;
+}
+
 const API_MESSAGES: Record<string, { message: string; description: string }> = {
 	'request-files-required': {
 		message: 'This model needs a file',
@@ -123,7 +200,8 @@ function titleCase(text: string): string {
 
 /** A readable label: the catalog label, or the input's id when the label is a key or missing. */
 export function inputLabel(parameter: ModelParameter): string {
-	const label = String(parameter.label ?? '').trim();
+	// A label in another language falls back to the input's id, like a missing one.
+	const label = englishText(parameter.label) ?? '';
 	const looksLikeKey = !label || /^[a-z0-9]+(-[a-z0-9]+)+$/.test(label);
 	const base = looksLikeKey
 		? parameter.id.replace(/[_-]+/g, ' ').replace(/([a-z0-9])([A-Z])/g, '$1 $2')
@@ -165,7 +243,10 @@ function fieldDefault(parameter: ModelParameter, type: FieldType): string | numb
 	}
 	if (type === 'boolean') return String(value).toLowerCase() === 'true';
 	if (type === 'object' || type === 'array') return undefined;
-	return String(value);
+	// An option's value is not shown, only its English name, so it stays as the API takes it.
+	if (type === 'options') return String(value);
+	// A default in another language is left out of the field; the run still sends the model's default.
+	return englishText(value);
 }
 
 /** The Inputs mapper's fields for one model. Advanced optional inputs start hidden but can be added. */
@@ -186,8 +267,8 @@ export function toMapperFields(parameters: ModelParameter[]): ResourceMapperFiel
 			field.options = (parameter.options ?? [])
 				.filter((option) => option.value !== undefined && option.value !== null)
 				.map(
-					(option): INodePropertyOptions => ({
-						name: String(option.text ?? option.value),
+					(option, index): INodePropertyOptions => ({
+						name: optionName(option, index),
 						value: String(option.value),
 					}),
 				);
