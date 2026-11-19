@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 (2026-11-18)
+
+- README: the node is verified by n8n, with a link to its page at https://n8n.io/integrations/wiro-ai/ and how to install it from the nodes panel. The node itself is the same as in 1.0.2.
+
 ## 1.0.2 (2026-11-12)
 
 - Model inputs show English text only. Options that the catalog names in another script get their English names, for example the Chinese dialects of OmniVoice. Labels, default values and model descriptions in another language are left out.

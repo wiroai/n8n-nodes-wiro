@@ -6,9 +6,9 @@
 
 One n8n node for every Wiro AI model: generate video, images, speech and music, chat with LLMs, edit and upscale images, and create 3D models inside your [n8n](https://n8n.io) workflows.
 
-[![npm](https://img.shields.io/npm/v/@wiro-ai/n8n-nodes-wiro?style=for-the-badge&color=111111)](https://www.npmjs.com/package/@wiro-ai/n8n-nodes-wiro) [![n8n community node](https://img.shields.io/badge/n8n-community%20node-111111?style=for-the-badge&color=111111)](https://docs.n8n.io/integrations/community-nodes/) [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=for-the-badge&color=111111)](LICENSE.md)
+[![npm](https://img.shields.io/npm/v/@wiro-ai/n8n-nodes-wiro?style=for-the-badge&color=111111)](https://www.npmjs.com/package/@wiro-ai/n8n-nodes-wiro) [![Verified by n8n](https://img.shields.io/badge/n8n-verified%20node-111111?style=for-the-badge&color=111111)](https://n8n.io/integrations/wiro-ai/) [![n8n community node](https://img.shields.io/badge/n8n-community%20node-111111?style=for-the-badge&color=111111)](https://docs.n8n.io/integrations/community-nodes/) [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=for-the-badge&color=111111)](LICENSE.md)
 
-[Website](https://wiro.ai) · [Models](https://wiro.ai/models) · [Docs](https://wiro.ai/docs) · [Dashboard](https://wiro.ai/panel)
+[Website](https://wiro.ai) · [n8n integration](https://n8n.io/integrations/wiro-ai/) · [Models](https://wiro.ai/models) · [Docs](https://wiro.ai/docs) · [Dashboard](https://wiro.ai/panel)
 
 <img src="https://wiro.ai/images/illustrations/koala-404.png" alt="Wiro AI koala mascot" width="50"/>
 
@@ -44,7 +44,9 @@ The image step: the prompt from the step before, the model's inputs and the outp
 
 ## Installation
 
-On a self-hosted n8n instance, an Owner or Admin can go to **Settings > Community Nodes**, select **Install**, enter `@wiro-ai/n8n-nodes-wiro`, accept the risk notice and select **Install**. The [n8n community nodes guide](https://docs.n8n.io/integrations/community-nodes/installation/) covers the other install methods.
+The Wiro AI node is verified by n8n: [n8n.io/integrations/wiro-ai](https://n8n.io/integrations/wiro-ai/). An instance owner can find **Wiro AI** in the nodes panel of the workflow editor and install it, on n8n Cloud and on self-hosted instances that show verified community nodes. After that, everyone on the instance can add it to their workflows.
+
+On a self-hosted n8n instance, an Owner or Admin can also go to **Settings > Community Nodes**, select **Install**, enter `@wiro-ai/n8n-nodes-wiro`, accept the risk notice and select **Install**. The [n8n community nodes guide](https://docs.n8n.io/integrations/community-nodes/installation/) covers the other install methods.
 
 For a manual install (for example inside a Docker container), run this in `~/.n8n/nodes` and restart n8n:
 
