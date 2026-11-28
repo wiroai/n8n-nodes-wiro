@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4 (2026-11-28)
+
+- The node reads the file limit of a file input from `maxinputlength`, its name in the Wiro AI catalog after the catalog's rename, so inputs that take several files keep "(Comma-Separated)" in their name. The old, misspelled name is no longer read. Needs the Wiro AI release that renames the field.
+- `npm run lint` also runs `npm test`, a check that the old name does not come back.
+
 ## 1.0.3 (2026-11-18)
 
 - README: the node is verified by n8n, with a link to its page at https://n8n.io/integrations/wiro-ai/ and how to install it from the nodes panel. The node itself is the same as in 1.0.2.
