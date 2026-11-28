@@ -22,7 +22,7 @@ export interface ModelParameter {
 	required?: boolean;
 	advanced?: boolean;
 	defaultvalue?: unknown;
-	maxinputlenght?: string | number | null;
+	maxinputlength?: string | number | null;
 	options?: Array<{ text?: string; value?: unknown }>;
 }
 
@@ -216,7 +216,7 @@ export function inputLabel(parameter: ModelParameter): string {
 function takesSeveralFiles(parameter: ModelParameter): boolean {
 	if (parameter.type === 'multifileinput' || parameter.type === 'multifileinputdrop') return true;
 	if (parameter.type !== 'combinefileinput') return false;
-	const capacity = Number(parameter.maxinputlenght ?? 1);
+	const capacity = Number(parameter.maxinputlength ?? 1);
 	return Number.isFinite(capacity) && capacity > 1;
 }
 

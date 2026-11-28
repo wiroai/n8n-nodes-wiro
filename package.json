@@ -1,6 +1,6 @@
 {
 	"name": "@wiro-ai/n8n-nodes-wiro",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Run 1,000+ Wiro AI models for video, images, audio, text and 3D in n8n, from one node.",
 	"license": "MIT",
 	"homepage": "https://wiro.ai",
@@ -32,8 +32,9 @@
 		"build": "n8n-node build",
 		"build:watch": "tsc --watch",
 		"dev": "n8n-node dev",
-		"lint": "n8n-node lint",
+		"lint": "n8n-node lint && npm test",
 		"lint:fix": "n8n-node lint --fix",
+		"test": "node --test test/*.test.mjs",
 		"release": "n8n-node release",
 		"prepublishOnly": "n8n-node prerelease"
 	},
